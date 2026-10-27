@@ -88,10 +88,17 @@ cd 03-computation/python && python co07_binary_inaccuracy.py
 cd 03-computation/java   && java CO07BinaryInaccuracy.java
 ```
 
+### In GitHub Codespaces (nothing to install)
+
+On GitHub: **Code → Codespaces → Create codespace on main**. Python 3.12, Java 17, Maven, the static
+analysis tools and all VS Code extensions are installed automatically. The first start takes a few minutes.
+
 ### In VS Code
 
-Open `myers-checklist-demos.code-workspace` (File → Open Workspace from File) and install the recommended
-extensions when VS Code asks. Then, in **Run and Debug**:
+Open the `myers-checklist-demos` folder (File → Open Folder) and click **Install** when VS Code asks about
+the recommended extensions. You need Python 3.10+ and a JDK 17+ on your computer.
+(With Docker and the Dev Containers extension you can also choose **Reopen in Container** to get the same
+setup as Codespaces.) Then, in **Run and Debug**:
 
 | Configuration | What it does |
 |---|---|

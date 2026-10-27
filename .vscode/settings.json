@@ -1,0 +1,14 @@
+{
+  "files.exclude": {
+    "target": true,
+    "**/__pycache__": true,
+    ".ruff_cache": true,
+    ".mypy_cache": true
+  },
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.compile.nullAnalysis.mode": "disabled",
+  "python.terminal.activateEnvironment": true,
+  "editor.rulers": [
+    120
+  ]
+}

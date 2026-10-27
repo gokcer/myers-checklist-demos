@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run ALL examples",
+      "type": "shell",
+      "command": "python3 tools/run_all.py",
+      "windows": {
+        "command": "python tools/run_all.py"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Static analysis: Ruff (Python)",
+      "type": "shell",
+      "command": "ruff check . --output-format concise",
+      "problemMatcher": []
+    },
+    {
+      "label": "Static analysis: mypy (Python)",
+      "type": "shell",
+      "command": "python3 -m mypy 01-data-reference/python 02-data-declaration/python 03-computation/python 04-comparison/python 05-control-flow/python 06-interface/python 07-input-output/python 08-other-checks/python",
+      "windows": {
+        "command": "python -m mypy 01-data-reference/python 02-data-declaration/python 03-computation/python 04-comparison/python 05-control-flow/python 06-interface/python 07-input-output/python 08-other-checks/python"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Static analysis: codespell (both)",
+      "type": "shell",
+      "command": "codespell --skip '*.md,./target' .",
+      "problemMatcher": []
+    },
+    {
+      "label": "Static analysis: javac -Xlint:all (Java)",
+      "type": "shell",
+      "command": "mvn -q clean compile",
+      "problemMatcher": []
+    },
+    {
+      "label": "Static analysis: PMD (Java)",
+      "type": "shell",
+      "command": "mvn compile pmd:check",
+      "problemMatcher": []
+    },
+    {
+      "label": "Static analysis: SpotBugs (Java)",
+      "type": "shell",
+      "command": "mvn compile spotbugs:check",
+      "problemMatcher": []
+    }
+  ]
+}
