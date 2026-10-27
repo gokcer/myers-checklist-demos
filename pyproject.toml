@@ -1,0 +1,38 @@
+# Static analysis settings for the Python examples.
+# These examples contain bugs ON PURPOSE. The tools are expected to report some of them.
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+preview = true                 # needed for RUF069 (float-equality-comparison)
+
+[tool.ruff.lint]
+select = [
+    "E", "W",   # pycodestyle
+    "F",        # Pyflakes: unused names, wrong format strings, assert on a tuple, is with a literal
+    "B",        # flake8-bugbear: likely bugs (mutable defaults, strip with several characters)
+    "PL",       # Pylint rules
+    "RUF",      # Ruff-specific rules (chained and/or, float equality, mutable class attributes)
+    "SIM",      # simplify (open() without with, try/except/pass)
+]
+ignore = [
+    "PLR2004",  # magic numbers: normal in small examples
+    "PLR6301",  # "could be a function": style only
+    "PLR6104",  # "use +=": style only
+    "PLR6201",  # "use a set literal": style only
+    "PLC0415",  # import not at top: style only
+    "PLR1730",  # "use max()": style only
+    "PLR0133",  # comparison of constants: used on purpose in demo output lines
+    "PLR1714",  # "merge comparisons with in": the fixes keep the shape of the buggy code on purpose
+    "SIM108",
+    "SIM110",   # "use any()": the loops are written out on purpose
+    "B903",     # "use a dataclass": plain classes on purpose   # "use a ternary": the fixes keep the if/else shape of the buggy code on purpose
+    "E402",     # import after sys.path change (IF07)
+]
+
+[tool.mypy]
+check_untyped_defs = true
+strict_equality = true
+warn_unreachable = true
+ignore_missing_imports = true
+enable_error_code = ["possibly-undefined", "redundant-expr", "truthy-bool"]

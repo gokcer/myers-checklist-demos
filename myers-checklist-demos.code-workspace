@@ -1,0 +1,147 @@
+{
+  "folders": [{ "path": "." }],
+  "settings": {
+    "files.exclude": { "target": true, "**/__pycache__": true, ".ruff_cache": true, ".mypy_cache": true },
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.compile.nullAnalysis.mode": "disabled",
+    "python.terminal.activateEnvironment": true,
+    "editor.rulers": [120]
+  },
+  "extensions": {
+    "recommendations": [
+      "ms-python.python",
+      "ms-python.debugpy",
+      "charliermarsh.ruff",
+      "ms-python.mypy-type-checker",
+      "redhat.java",
+      "vscjava.vscode-java-debug",
+      "vscjava.vscode-maven",
+      "streetsidesoftware.code-spell-checker"
+    ]
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run this example (Python)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${file}",
+        "cwd": "${fileDirname}",
+        "console": "integratedTerminal",
+        "justMyCode": true
+      },
+      {
+        "name": "Run this example (Java)",
+        "type": "java",
+        "request": "launch",
+        "mainClass": "${fileBasenameNoExtension}",
+        "projectName": "myers-checklist-demos",
+        "cwd": "${fileDirname}",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Run ALL examples (Python + Java)",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/tools/run_all.py",
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Run ALL Python examples",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/tools/run_all.py",
+        "args": ["python"],
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Run ALL Java examples",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/tools/run_all.py",
+        "args": ["java"],
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal"
+      },
+      {
+        "name": "Run one checklist category...",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/tools/run_all.py",
+        "args": ["all", "${input:category}"],
+        "cwd": "${workspaceFolder}",
+        "console": "integratedTerminal"
+      }
+    ],
+    "inputs": [
+      {
+        "id": "category",
+        "type": "pickString",
+        "description": "Which checklist category?",
+        "options": [
+          { "label": "01 Data reference", "value": "01" },
+          { "label": "02 Data declaration", "value": "02" },
+          { "label": "03 Computation", "value": "03" },
+          { "label": "04 Comparison", "value": "04" },
+          { "label": "05 Control flow", "value": "05" },
+          { "label": "06 Interface", "value": "06" },
+          { "label": "07 Input / output", "value": "07" },
+          { "label": "08 Other checks", "value": "08" }
+        ]
+      }
+    ]
+  },
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Run ALL examples",
+        "type": "shell",
+        "command": "python3 tools/run_all.py",
+        "windows": { "command": "python tools/run_all.py" },
+        "problemMatcher": [],
+        "group": { "kind": "test", "isDefault": true }
+      },
+      {
+        "label": "Static analysis: Ruff (Python)",
+        "type": "shell",
+        "command": "ruff check . --output-format concise",
+        "problemMatcher": []
+      },
+      {
+        "label": "Static analysis: mypy (Python)",
+        "type": "shell",
+        "command": "python3 -m mypy 01-data-reference/python 02-data-declaration/python 03-computation/python 04-comparison/python 05-control-flow/python 06-interface/python 07-input-output/python 08-other-checks/python",
+        "windows": { "command": "python -m mypy 01-data-reference/python 02-data-declaration/python 03-computation/python 04-comparison/python 05-control-flow/python 06-interface/python 07-input-output/python 08-other-checks/python" },
+        "problemMatcher": []
+      },
+      {
+        "label": "Static analysis: codespell (both)",
+        "type": "shell",
+        "command": "codespell --skip '*.md,./target' .",
+        "problemMatcher": []
+      },
+      {
+        "label": "Static analysis: javac -Xlint:all (Java)",
+        "type": "shell",
+        "command": "mvn -q clean compile",
+        "problemMatcher": []
+      },
+      {
+        "label": "Static analysis: PMD (Java)",
+        "type": "shell",
+        "command": "mvn compile pmd:check",
+        "problemMatcher": []
+      },
+      {
+        "label": "Static analysis: SpotBugs (Java)",
+        "type": "shell",
+        "command": "mvn compile spotbugs:check",
+        "problemMatcher": []
+      }
+    ]
+  }
+}

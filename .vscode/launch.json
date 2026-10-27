@@ -1,0 +1,78 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "DR06RecordLayout",
+      "request": "launch",
+      "mainClass": "DR06RecordLayout",
+      "projectName": "myers-checklist-demos"
+    },
+    {
+      "type": "java",
+      "name": "DR03NonIntegerIndex",
+      "request": "launch",
+      "mainClass": "DR03NonIntegerIndex",
+      "projectName": "myers-checklist-demos"
+    },
+    {
+      "name": "Run this example (Python)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${file}",
+      "cwd": "${fileDirname}",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    },
+    {
+      "name": "Run this example (Java)",
+      "type": "java",
+      "request": "launch",
+      "mainClass": "${fileBasenameNoExtension}",
+      "projectName": "myers-checklist-demos",
+      "cwd": "${fileDirname}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run ALL examples (Python + Java)",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/run_all.py",
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run ALL Python examples",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/run_all.py",
+      "args": [
+        "python"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run ALL Java examples",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/run_all.py",
+      "args": [
+        "java"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Run one checklist category...",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/tools/run_all.py",
+      "args": [
+        "all",
+        "${input:category}"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal"
+    }
+  ]
+}

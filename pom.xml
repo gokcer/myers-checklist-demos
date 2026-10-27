@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Optional Maven build: compiles ALL Java examples together and runs the static analysis tools.
+     You do not need it to run an example (java File.java is enough).
+
+       mvn -q compile          javac with -Xlint:all  (compiler warnings)
+       mvn compile pmd:check   PMD, quickstart rules   (report in target/pmd.xml)
+       mvn compile spotbugs:check   SpotBugs           (report in target/spotbugsXml.xml)
+
+     The examples contain bugs ON PURPOSE, so the tools are configured to report, not to fail the build. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>edu.example</groupId>
+  <artifactId>myers-checklist-demos</artifactId>
+  <version>1.0</version>
+  <packaging>jar</packaging>
+
+  <properties>
+    <maven.compiler.release>17</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.6.0</version>
+        <executions>
+          <execution>
+            <id>add-example-folders</id>
+            <phase>generate-sources</phase>
+            <goals><goal>add-source</goal></goals>
+            <configuration>
+              <sources>
+                <source>01-data-reference/java</source>
+                <source>02-data-declaration/java</source>
+                <source>03-computation/java</source>
+                <source>04-comparison/java</source>
+                <source>05-control-flow/java</source>
+                <source>06-interface/java</source>
+                <source>07-input-output/java</source>
+                <source>08-other-checks/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <compilerArgs><arg>-Xlint:all</arg></compilerArgs>
+          <showWarnings>true</showWarnings>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-pmd-plugin</artifactId>
+        <version>3.26.0</version>
+        <configuration>
+          <rulesets><ruleset>/rulesets/java/quickstart.xml</ruleset></rulesets>
+          <printFailingErrors>true</printFailingErrors>
+          <failOnViolation>false</failOnViolation>
+          <linkXRef>false</linkXRef>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.github.spotbugs</groupId>
+        <artifactId>spotbugs-maven-plugin</artifactId>
+        <version>4.8.6.6</version>
+        <configuration>
+          <effort>Max</effort>
+          <threshold>Low</threshold>
+          <failOnError>false</failOnError>
+          <xmlOutput>true</xmlOutput>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
